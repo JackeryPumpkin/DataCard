@@ -36,7 +36,7 @@ class DataCard: Card {
     
     private func sharedInit() {
         //color = #colorLiteral(red: 0, green: 0.8235294223, blue: 0.04214655889, alpha: 1)
-        colorScheme = .lightToDark
+        colorScheme = .darkToLight
         
         // Text
         headerLabel.text = header

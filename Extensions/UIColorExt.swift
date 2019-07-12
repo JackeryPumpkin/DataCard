@@ -96,11 +96,23 @@ extension UIColor {
     func complementary() -> UIColor {
         let ciColor = CIColor(color: self)
         
-        // get the current values and make the difference from white:
+        // Get the current values and make the difference from white
         let compRed: CGFloat = 1.0 - ciColor.red
         let compGreen: CGFloat = 1.0 - ciColor.green
         let compBlue: CGFloat = 1.0 - ciColor.blue
         
-        return UIColor(red: compRed, green: compGreen, blue: compBlue, alpha: 1.0)
+        return UIColor(red: compRed, green: compGreen, blue: compBlue, alpha: ciColor.alpha)
+    }
+    
+    func saturated(by modifier: CGFloat) -> UIColor {
+        let ciColor = CIColor(color: self)
+        
+        if ciColor.red > ciColor.blue && ciColor.red > ciColor.green {
+            return UIColor(red: ciColor.red, green: ciColor.green - modifier, blue: ciColor.blue - modifier, alpha: ciColor.alpha)
+        } else if ciColor.blue > ciColor.green && ciColor.blue > ciColor.red {
+            return UIColor(red: ciColor.red - modifier, green: ciColor.green - modifier, blue: ciColor.blue, alpha: ciColor.alpha)
+        } else {
+            return UIColor(red: ciColor.red - modifier, green: ciColor.green + modifier, blue: ciColor.blue - modifier, alpha: ciColor.alpha)
+        }
     }
 }

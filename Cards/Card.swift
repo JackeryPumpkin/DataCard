@@ -63,11 +63,9 @@ import UIKit
         sharedInit()
     }
     
-    override func didMoveToSuperview() {
+    override func layoutSubviews() {
+        super.layoutSubviews()
         setGradient()
-        layoutIfNeeded()
-        //Update Frames
-        //updateConstraints()
     }
     
     private func sharedInit() {
@@ -148,11 +146,19 @@ extension Card {
     }
     
     func lightToDark() -> [CGColor] {
-        return [color.cgColor, (color - 0.01).cgColor, (color - 0.05).cgColor, (color - 0.1).cgColor]
+        // Burn
+        //return [color.cgColor, (color - 0.01).cgColor, (color - 0.05).cgColor, (color - 0.1).cgColor]
+        
+        // Saturation
+        return [color.cgColor, (color.saturated(by: 0.01)).cgColor, (color.saturated(by: 0.1)).cgColor, (color.saturated(by: 0.2)).cgColor]
     }
     
     func darkToLight() -> [CGColor] {
-        return [(color - 0.1).cgColor, color.cgColor]
+        // Burn
+        //return [(color - 0.2).cgColor, color.cgColor]
+        
+        // Saturation
+        return [(color.saturated(by: 0.1)).cgColor, color.cgColor]
     }
     
     func complementaryNatural() -> [CGColor] {
